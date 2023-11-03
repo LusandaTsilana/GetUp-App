@@ -8,7 +8,7 @@ const Landing = () => {
     <View style={styles.container}>
       <Head />
       <Image style={styles.image} source={RunGirl} />
-      <Text style={styles.slogan}>Cole Hanekom</Text>
+      <Text style={styles.slogan}>Embrace Your Power</Text>
       <Text style={styles.phrase}>Maximize your fitness potential</Text>
       <View style={styles.buttons}>
         <TouchableOpacity style={styles.buttonL}>
