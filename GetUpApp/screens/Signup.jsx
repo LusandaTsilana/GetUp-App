@@ -8,7 +8,6 @@ const Signup = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({});
 
 export default Signup;
-
-const styles = StyleSheet.create({});
