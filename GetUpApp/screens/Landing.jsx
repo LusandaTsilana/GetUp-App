@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
   },
   phrase: {
     fontSize: 16,
+    marginTop: 10,
   },
   buttons: {
     flexDirection: "row",
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     width: 112,
     height: 42,
     margin: 10,
-
+    flexShrink: 0,
     borderRadius: 20,
   },
   buttonS: {
