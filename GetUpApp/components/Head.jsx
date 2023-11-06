@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 40,
-    marginTop: 50,
+    marginTop: 10,
     marginBottom: 20,
   },
   logo: {
     width: 42,
     height: 48,
-    marginBottom: 30,
+    marginBottom: 10,
   },
 });
 
