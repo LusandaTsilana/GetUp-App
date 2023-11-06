@@ -1,9 +1,12 @@
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import Head from "../components/Head";
 import RunGirl from "../assets/run-girl.gif";
 
 const Landing = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Head />
@@ -11,10 +14,16 @@ const Landing = () => {
       <Text style={styles.slogan}>Embrace Your Power</Text>
       <Text style={styles.phrase}>Maximize your fitness potential</Text>
       <View style={styles.buttons}>
-        <TouchableOpacity style={styles.buttonL}>
+        <TouchableOpacity
+          style={styles.buttonL}
+          onPress={() => navigation.navigate("Login")}
+        >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonS}>
+        <TouchableOpacity
+          style={styles.buttonS}
+          onPress={() => navigation.navigate("Signup")}
+        >
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
@@ -24,9 +33,9 @@ const Landing = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
     alignItems: "center",
     justifyContent: "center", // Center the content vertically
+    backgroundColor: "white",
   },
   image: {
     width: 393,
@@ -65,6 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 5,
     textAlign: "center",
+    letterSpacing: 2.4,
   },
 });
 

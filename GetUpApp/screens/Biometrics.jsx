@@ -8,7 +8,5 @@ const Biometrics = () => {
     </View>
   );
 };
-
-export default Biometrics;
-
 const styles = StyleSheet.create({});
+export default Biometrics;

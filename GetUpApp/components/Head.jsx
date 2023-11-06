@@ -16,16 +16,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   heading: {
     fontSize: 40,
-    marginTop: 10,
+    marginTop: 30,
     marginBottom: 20,
+    letterSpacing: 2.4,
   },
   logo: {
     width: 42,
     height: 48,
-    marginBottom: 20,
   },
 });
 

@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { Link } from "@react-navigation/native";
+
 import React from "react";
 import Head from "../components/Head";
 import Facebook from "../assets/facebook.png";
@@ -34,7 +36,12 @@ const Login = () => {
             <Image style={styles.image} source={Facebook} />
             <Image style={styles.image} source={Google} />
           </View>
-          <Text style={styles.text}>Don't have an account? SIGN UP</Text>
+          <Text style={styles.text}>
+            Don't have an account?
+            <Link to={{ screen: "Signup" }} style={styles.signtext}>
+              SIGN UP
+            </Link>
+          </Text>
         </View>
       </View>
     </View>
@@ -42,9 +49,6 @@ const Login = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 25,
-  },
   box: {
     backgroundColor: "#F0C9A5",
   },
@@ -53,9 +57,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 30,
     marginTop: 50,
+    letterSpacing: 2.4,
   },
   form: {
-    paddingHorizontal: 50,
+    paddingHorizontal: 40,
     paddingVertical: 20,
   },
   label: {
@@ -104,6 +109,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 30,
     marginTop: 20,
+  },
+
+  signtext: {
+    fontWeight: "bold",
   },
 
   image: {
