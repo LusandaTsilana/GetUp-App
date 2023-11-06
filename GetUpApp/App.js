@@ -5,6 +5,7 @@ import { StyleSheet, View } from "react-native";
 // import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Landing from "./screens/Landing";
+import Login from "./screens/Login";
 // import Signup from "./screens/Signup";
 
 // const Stack = createNativeStackNavigator();
@@ -12,7 +13,7 @@ import Landing from "./screens/Landing";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Landing />
+      <Login />
       <StatusBar style="auto" />
     </View>
     // <NavigationContainer>
@@ -28,9 +29,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 40,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "start",
   },
 });

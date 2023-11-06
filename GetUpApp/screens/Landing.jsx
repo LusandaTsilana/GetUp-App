@@ -24,7 +24,6 @@ const Landing = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     marginTop: 25,
     alignItems: "center",
     justifyContent: "center", // Center the content vertically
