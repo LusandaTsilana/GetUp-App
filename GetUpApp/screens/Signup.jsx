@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,9 @@ import Facebook from "../assets/facebook.png";
 import Google from "../assets/google.png";
 
 const Signup = () => {
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -131,6 +134,7 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: "row",
     justifyContent: "center",
+    paddingBottom: 30,
   },
 });
 
