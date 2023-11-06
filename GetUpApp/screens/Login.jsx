@@ -4,9 +4,12 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import React from "react";
 import Head from "../components/Head";
+import Facebook from "../assets/facebook.png";
+import Google from "../assets/google.png";
 
 const Login = () => {
   return (
@@ -22,9 +25,16 @@ const Login = () => {
           <Text style={styles.label}>Password</Text>
           <TextInput style={styles.input} placeholder="Enter your password" />
 
-          <TouchableOpacity style={styles.buttonL}>
+          <TouchableOpacity style={styles.buttonL} onPress={() => {}}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
+
+          <Text style={styles.text}>Or Log In with:</Text>
+          <View style={styles.icons}>
+            <Image style={styles.image} source={Facebook} />
+            <Image style={styles.image} source={Google} />
+          </View>
+          <Text style={styles.text}>Don't have an account? SIGN UP</Text>
         </View>
       </View>
     </View>
@@ -71,6 +81,7 @@ const styles = StyleSheet.create({
     width: 307,
     height: 42,
     flexShrink: 0,
+    marginVertical: 20,
     borderRadius: 20,
     flexShrink: 0,
     shadowColor: "rgba(0, 0, 0, 0.25)", // iOS shadow color
@@ -86,6 +97,24 @@ const styles = StyleSheet.create({
     marginTop: 5,
     paddingBottom: 10,
     textAlign: "center",
+  },
+
+  text: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 30,
+    marginTop: 20,
+  },
+
+  image: {
+    width: 55,
+    height: 55,
+    marginHorizontal: 20,
+  },
+
+  icons: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
 
