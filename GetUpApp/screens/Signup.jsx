@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     marginBottom: 30,
-    marginTop: 50,
+    marginTop: 30,
     letterSpacing: 2.4,
   },
   form: {
