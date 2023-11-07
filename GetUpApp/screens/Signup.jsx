@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,22 +9,59 @@ import {
   Image,
   KeyboardAvoidingView,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import Head from "../components/Head";
 import Facebook from "../assets/facebook.png";
 import Google from "../assets/google.png";
 
 const Signup = () => {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [cpassword, setCpassword] = useState("");
+  const navigation = useNavigation();
+
+  const schema = yup.object().shape({
+    fname: yup.string().required("Your first name is required"),
+    lname: yup.string().required("Your last name is required"),
+    email: yup
+      .string()
+      .email("Incorrect email format. Enter a valid email")
+      .required("Your email is required"),
+    password: yup.string().required("Password is required"),
+    cpassword: yup
+      .string()
+      .required("Password is required")
+      .oneOf([yup.ref("password"), null], "Password do not match. Try again"),
+  });
+
+  const {
+    control,
+    handleSubmit,
+    // fieldState: { error },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      fname: "",
+      lname: "",
+      email: "",
+      password: "",
+      cpassword: "",
+    },
+  });
+
+  //data will be collected and stored through the functions of submission
+  const onSubmit = (data) => {
+    console.log(data);
+    navigation.navigate("Biometrics");
+  };
 
   return (
     <KeyboardAvoidingView
       behavior="padding"
       keyboardVerticalOffset={100}
-      style={{ flex: 1, backgroundColor: "#F0C9A5" }}
+      style={{ flex: 1, backgroundColor: "#F1D8C1" }}
     >
       <ScrollView>
         <Head />
@@ -34,44 +71,116 @@ const Signup = () => {
 
           <View style={styles.form}>
             <Text style={styles.label}>First Name</Text>
-            <TextInput
-              style={styles.input}
-              value={fname}
-              onChangeText={setFname}
-              placeholder="Enter your first name"
+            <Controller
+              name="fname"
+              control={control}
+              render={({ field, fieldState }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your first name"
+                    onChangeText={field.onChange}
+                    value={field.value}
+                  />
+                  {fieldState.invalid && (
+                    <Text style={styles.emessage}>
+                      {fieldState.error?.message}
+                    </Text>
+                  )}
+                </>
+              )}
             />
+
+            {/* Repeat the above block for other form fields (lname, email, password, cpassword) */}
+
             <Text style={styles.label}>Last Name</Text>
-            <TextInput
-              style={styles.input}
-              value={lname}
-              onChangeText={setLname}
-              placeholder="Enter your last name"
+            <Controller
+              name="lname"
+              control={control}
+              render={({ field, fieldState }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your last name"
+                    onChangeText={field.onChange}
+                    value={field.value}
+                  />
+                  {fieldState.invalid && (
+                    <Text style={styles.emessage}>
+                      {fieldState.error?.message}
+                    </Text>
+                  )}
+                </>
+              )}
             />
+
             <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={styles.input}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="Enter your email"
+            <Controller
+              name="email"
+              control={control}
+              render={({ field, fieldState }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your email"
+                    onChangeText={field.onChange}
+                    value={field.value}
+                  />
+                  {fieldState.invalid && (
+                    <Text style={styles.emessage}>
+                      {fieldState.error?.message}
+                    </Text>
+                  )}
+                </>
+              )}
             />
 
             <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Enter your password"
+            <Controller
+              name="password"
+              control={control}
+              render={({ field, fieldState }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your password"
+                    onChangeText={field.onChange}
+                    value={field.value}
+                  />
+                  {fieldState.invalid && (
+                    <Text style={styles.emessage}>
+                      {fieldState.error?.message}
+                    </Text>
+                  )}
+                </>
+              )}
             />
 
             <Text style={styles.label}>Confirm Password</Text>
-            <TextInput
-              style={styles.input}
-              value={cpassword}
-              onChangeText={setCpassword}
-              placeholder="Confirm your password"
+            <Controller
+              name="cpassword"
+              control={control}
+              render={({ field, fieldState }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Confirm your password"
+                    onChangeText={field.onChange}
+                    value={field.value}
+                  />
+                  {fieldState.invalid && (
+                    <Text style={styles.emessage}>
+                      {fieldState.error?.message}
+                    </Text>
+                  )}
+                </>
+              )}
             />
 
-            <TouchableOpacity style={styles.buttonS} onPress={() => {}}>
+            <TouchableOpacity
+              style={styles.buttonS}
+              onPress={handleSubmit(onSubmit)}
+            >
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
 
@@ -108,7 +217,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "white",
     paddingHorizontal: 10,
-    marginBottom: 20,
+    marginBottom: 30,
     width: 307,
     height: 42,
     borderRadius: 8,
@@ -116,6 +225,12 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 }, // iOS shadow offset (x, y)
     shadowOpacity: 1, // iOS shadow opacity
     shadowRadius: 4, // iOS shadow radius
+  },
+
+  emessage: {
+    color: "red",
+    fontSize: 12,
+    paddingBottom: 25,
   },
   buttonS: {
     justifyContent: "center",
