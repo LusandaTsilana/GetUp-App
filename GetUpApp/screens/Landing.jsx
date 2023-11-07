@@ -7,6 +7,7 @@ import RunGirl from "../assets/run-girl.gif";
 
 const Landing = () => {
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Head />
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   },
   buttonL: {
     backgroundColor: "#E88328",
-    width: 112,
+    width: 140,
     height: 42,
     margin: 10,
     flexShrink: 0,
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   },
   buttonS: {
     backgroundColor: "#E07D23",
-    width: 112,
+    width: 140,
     height: 42,
     margin: 10,
     flexShrink: 0,

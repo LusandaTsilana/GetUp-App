@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
 } from "react-native";
 import { Link } from "@react-navigation/native";
 
@@ -15,7 +16,11 @@ import Google from "../assets/google.png";
 
 const Login = () => {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={100}
+      style={{ flex: 1, backgroundColor: "#F0C9A5" }}
+    >
       <Head />
       {/*  Above is the header with the name & logo */}
       <View style={styles.box}>
@@ -44,7 +49,7 @@ const Login = () => {
           </Text>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

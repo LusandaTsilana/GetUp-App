@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
 } from "react-native";
 import Head from "../components/Head";
 import Facebook from "../assets/facebook.png";
@@ -15,9 +16,16 @@ import Google from "../assets/google.png";
 const Signup = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={100}
+      style={{ flex: 1, backgroundColor: "#F0C9A5" }}
+    >
       <ScrollView>
         <Head />
         {/*  Above is the header with the name & logo */}
@@ -28,20 +36,38 @@ const Signup = () => {
             <Text style={styles.label}>First Name</Text>
             <TextInput
               style={styles.input}
+              value={fname}
+              onChangeText={setFname}
               placeholder="Enter your first name"
             />
             <Text style={styles.label}>Last Name</Text>
             <TextInput
               style={styles.input}
+              value={lname}
+              onChangeText={setLname}
               placeholder="Enter your last name"
             />
             <Text style={styles.label}>Email</Text>
-            <TextInput style={styles.input} placeholder="Enter your email" />
+            <TextInput
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Enter your email"
+            />
+
             <Text style={styles.label}>Password</Text>
-            <TextInput style={styles.input} placeholder="Enter your password" />
+            <TextInput
+              style={styles.input}
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Enter your password"
+            />
+
             <Text style={styles.label}>Confirm Password</Text>
             <TextInput
               style={styles.input}
+              value={cpassword}
+              onChangeText={setCpassword}
               placeholder="Confirm your password"
             />
 
@@ -57,7 +83,7 @@ const Signup = () => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 const styles = StyleSheet.create({
