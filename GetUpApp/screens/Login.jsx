@@ -12,6 +12,7 @@ import { Link } from "@react-navigation/native";
 import React from "react";
 import Head from "../components/Head";
 import Facebook from "../assets/facebook.png";
+import Twitter from "../assets/twitter.png";
 import Google from "../assets/google.png";
 
 const Login = () => {
@@ -39,6 +40,7 @@ const Login = () => {
           <Text style={styles.text}>Or Log In with:</Text>
           <View style={styles.icons}>
             <Image style={styles.image} source={Facebook} />
+            <Image style={styles.twitter} source={Twitter} />
             <Image style={styles.image} source={Google} />
           </View>
           <Text style={styles.text}>
@@ -123,6 +125,12 @@ const styles = StyleSheet.create({
   image: {
     width: 55,
     height: 55,
+    marginHorizontal: 20,
+  },
+
+  twitter: {
+    width: 55,
+    height: 60,
     marginHorizontal: 20,
   },
 
