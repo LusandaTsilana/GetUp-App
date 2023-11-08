@@ -16,16 +16,16 @@ const Landing = () => {
       <Text style={styles.phrase}>Maximize your fitness potential</Text>
       <View style={styles.buttons}>
         <TouchableOpacity
-          style={styles.buttonL}
-          onPress={() => navigation.navigate("Login")}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
           style={styles.buttonS}
           onPress={() => navigation.navigate("Signup")}
         >
           <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonL}
+          onPress={() => navigation.navigate("Login")}
+        >
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
     </View>

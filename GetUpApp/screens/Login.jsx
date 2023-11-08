@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
     borderWidth: 1, // Border width
   },
   buttonText: {
-    color: "#fff",
     fontSize: 20,
     marginTop: 5,
     paddingBottom: 10,
+    color: "#fff",
     textAlign: "center",
   },
 
