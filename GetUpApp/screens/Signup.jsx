@@ -16,6 +16,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Head from "../components/Head";
+import BackButton from "../components/BackButton";
 import Twitter from "../assets/twitter.png";
 import Facebook from "../assets/facebook.png";
 import Google from "../assets/google.png";
@@ -64,9 +65,11 @@ const Signup = () => {
       keyboardVerticalOffset={100}
       style={{ flex: 1, backgroundColor: "#F1D8C1" }}
     >
+      <Head />
       <ScrollView>
-        <Head />
-        {/*  Above is the header with the name & logo */}
+        <BackButton />
+
+        {/*  gg is the header with the name & logo */}
         <View style={styles.box}>
           <Text style={styles.heading}>Sign Up</Text>
 

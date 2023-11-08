@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
+
 import Logo from "../assets/logo.png";
 
 const Head = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>GetUp</Text>
-      <Image style={styles.logo} source={Logo} />
+    <View>
+      <View style={styles.container}>
+        <Text style={styles.heading}>GetUp</Text>
+        <Image style={styles.logo} source={Logo} />
+      </View>
     </View>
   );
 };

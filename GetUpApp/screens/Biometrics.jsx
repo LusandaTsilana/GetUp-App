@@ -54,8 +54,8 @@ const Biometrics = () => {
       keyboardVerticalOffset={100}
       style={{ flex: 1, backgroundColor: "#F0C9A5" }}
     >
+      <Head />
       <ScrollView>
-        <Head />
         {/*  Above is the header with the name & logo */}
         <View style={styles.box}>
           <Text style={styles.heading}>Biometrics</Text>
