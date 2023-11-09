@@ -10,7 +10,7 @@ import {
 
 import { React, useState, useEffect, createContext } from "react";
 import Head from "../components/Head";
-import BMI from "../components/BMI";
+
 import { useNavigation } from "@react-navigation/native";
 
 import * as yup from "yup";
@@ -23,19 +23,47 @@ const Biometrics = () => {
   const navigation = useNavigation();
 
   // biometric info to be used for BMI calculator
-  const [h, setHeight] = useState("");
-  const [w, setWeight] = useState("");
+  const [newheight, setHeight] = useState("");
+  const [newweight, setWeight] = useState("");
 
   //below the height and weight is updated and stored using useEffect which i will use in the BMI calculator
   useEffect(() => {
     const updatedBiometrics = {
-      h: h,
-      w: w,
+      height: newheight,
+      weight: newweight,
     };
     setHeight(updatedBiometrics.height);
     setWeight(updatedBiometrics.weight);
-  }, [h, w]);
+  }, [newheight, newweight]);
 
+  const bmiCalculator = () => {
+    const { height } = useContext(AppContext);
+    const { weight } = useContext(AppContext);
+
+    const [bmi, setBmi] = useState("");
+    const [description, setDescription] = useState("");
+
+    const resultBMI = () => {
+      const bmi = weight / (height * height);
+      setBmi(bmi.toFixed(1));
+
+      if (bmi < 18.5) {
+        setDescription(
+          "You have a great potential to get in better shape. Eat right and please consult your doctor"
+        );
+      } else if (bmi >= 18.5 && bmi <= 24.9) {
+        setDescription("You've got a great figure. Keep it up!");
+      } else if (bmi >= 25 && bmi <= 29.9) {
+        setDescription(
+          "You only need a bit more sweat exercises for a fitter figure"
+        );
+      } else if (bmi >= 30) {
+        setDescription(
+          "You may need to do more workouts and eat healthier for a better figure"
+        );
+      }
+    };
+  };
   // validation rules for input fields
   const schema = yup.object().shape({
     height: yup
@@ -51,7 +79,7 @@ const Biometrics = () => {
   const {
     control,
     handleSubmit,
-    // fieldState: { error },
+    fieldState: { error },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -62,8 +90,20 @@ const Biometrics = () => {
 
   //data will be collected and stored through the functions of submission
   const onSubmit = (data) => {
-    console.log(data);
-    navigation.navigate("Goal");
+    try {
+      // Submit the form data to the server
+      console.log(data);
+      navigation.navigate("Goal");
+    } catch (error) {
+      // Handle the error
+      if (error.message === "Network error") {
+        // Display an error message to the user
+        console.log("network/server errors");
+      } else if (error.message === "Server error") {
+        // Display an error message to the user
+        console.log("network/server errors");
+      }
+    }
   };
 
   return (
@@ -91,7 +131,7 @@ const Biometrics = () => {
                     // below we will bind the user height to newWeight variable
                     onChangeText={(event) => {
                       const newHeight = event.target.value;
-                      setHeight(h);
+                      setHeight(newHeight);
                       field.onChange(newHeight); // Update the Controller's value
                     }}
                     value={field.height}
@@ -129,8 +169,12 @@ const Biometrics = () => {
                 </>
               )}
             />
-            {/* BMI calculator below */}
-            <BMI />
+            {/* BMI container*/}
+            <View>
+              <Text style={styles.labelBMI}>Your BMI:</Text>
+              <Text style={styles.textBMI}>{bmi}</Text>
+              <Text style={styles.BMIDes}>{description}</Text>
+            </View>
 
             <TouchableOpacity
               style={styles.buttonN}
@@ -206,6 +250,23 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     color: "#fff",
     textAlign: "center",
+  },
+
+  labelBMI: {
+    textAlign: "center",
+    fontSize: 20,
+    marginTop: 25,
+  },
+  textBMI: {
+    textAlign: "center",
+    fontSize: 20,
+    marginTop: 25,
+  },
+
+  BMIResult: {
+    textAlign: "center",
+    fontSize: 20,
+    marginVertical: 30,
   },
 });
 export default Biometrics;
