@@ -8,17 +8,35 @@ import {
   ScrollView,
 } from "react-native";
 
-import React from "react";
+import { React, useState, useEffect, createContext } from "react";
 import Head from "../components/Head";
+import BMI from "../components/BMI";
 import { useNavigation } from "@react-navigation/native";
 
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+export const AppContext = createContext();
+
 const Biometrics = () => {
   const navigation = useNavigation();
 
+  // biometric info to be used for BMI calculator
+  const [h, setHeight] = useState("");
+  const [w, setWeight] = useState("");
+
+  //below the height and weight is updated and stored using useEffect which i will use in the BMI calculator
+  useEffect(() => {
+    const updatedBiometrics = {
+      height: h,
+      weight: w,
+    };
+    setHeight(updatedBiometrics.height);
+    setWeight(updatedBiometrics.weight);
+  }, [h, w]);
+
+  // validation rules for input fields
   const schema = yup.object().shape({
     height: yup
       .number("Height must be numerical")
@@ -70,8 +88,13 @@ const Biometrics = () => {
                   <TextInput
                     style={styles.input}
                     placeholder="How tall are you?"
-                    onChangeText={field.onChange}
-                    value={field.value}
+                    // below we will bind the user height to newWeight variable
+                    onChangeText={(event) => {
+                      const newHeight = event.target.value;
+                      setHeight(h);
+                      field.onChange(newHeight); // Update the Controller's value
+                    }}
+                    value={field.h}
                   />
                   {fieldState.invalid && (
                     <Text style={styles.emessage}>
@@ -91,8 +114,12 @@ const Biometrics = () => {
                   <TextInput
                     style={styles.input}
                     placeholder="How much do you weigh?"
-                    onChangeText={field.onChange}
-                    value={field.value}
+                    onChangeText={(event) => {
+                      const newWeight = event.target.value;
+                      setWeight(newWeight);
+                      field.onChange(newWeight); // Update the Controller's value
+                    }}
+                    value={field.w}
                   />
                   {fieldState.invalid && (
                     <Text style={styles.emessage}>
@@ -102,12 +129,9 @@ const Biometrics = () => {
                 </>
               )}
             />
+            {/* BMI calculator below */}
+            <BMI />
 
-            <Text style={styles.label}>Your BMI:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Your BMI based on our calculation"
-            />
             <TouchableOpacity
               style={styles.buttonN}
               onPress={handleSubmit(onSubmit)}
@@ -139,6 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingBottom: 15,
   },
+
   input: {
     backgroundColor: "white",
     paddingHorizontal: 10,
