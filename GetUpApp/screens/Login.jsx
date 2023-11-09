@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
 import { Link } from "@react-navigation/native";
@@ -14,17 +15,19 @@ import Head from "../components/Head";
 import Facebook from "../assets/facebook.png";
 import Twitter from "../assets/twitter.png";
 import Google from "../assets/google.png";
+import BackButton from "../components/BackButton";
 
 const Login = () => {
   return (
     <KeyboardAvoidingView
       behavior="padding"
       keyboardVerticalOffset={100}
-      style={{ flex: 1, backgroundColor: "#F0C9A5" }}
+      style={{ flex: 1, backgroundColor: "#F1D8C1" }}
     >
+      <BackButton />
       <Head />
       {/*  Above is the header with the name & logo */}
-      <View style={styles.box}>
+      <ScrollView style={styles.box}>
         <Text style={styles.heading}>Log In</Text>
 
         <View style={styles.form}>
@@ -50,7 +53,7 @@ const Login = () => {
             </Link>
           </Text>
         </View>
-      </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };

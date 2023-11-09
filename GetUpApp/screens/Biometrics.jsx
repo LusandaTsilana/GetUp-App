@@ -61,7 +61,7 @@ const Biometrics = () => {
           <Text style={styles.heading}>Biometrics</Text>
 
           <View style={styles.form}>
-            <Text style={styles.label}>Height (cm)</Text>
+            <Text style={styles.label}>Height (m)</Text>
             <Controller
               name="height"
               control={control}

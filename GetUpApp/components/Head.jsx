@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
   },
+
   heading: {
     fontSize: 40,
     marginTop: 30,
