@@ -29,8 +29,8 @@ const Biometrics = () => {
   //below the height and weight is updated and stored using useEffect which i will use in the BMI calculator
   useEffect(() => {
     const updatedBiometrics = {
-      height: h,
-      weight: w,
+      h: h,
+      w: w,
     };
     setHeight(updatedBiometrics.height);
     setWeight(updatedBiometrics.weight);
@@ -94,7 +94,7 @@ const Biometrics = () => {
                       setHeight(h);
                       field.onChange(newHeight); // Update the Controller's value
                     }}
-                    value={field.h}
+                    value={field.height}
                   />
                   {fieldState.invalid && (
                     <Text style={styles.emessage}>
@@ -119,7 +119,7 @@ const Biometrics = () => {
                       setWeight(newWeight);
                       field.onChange(newWeight); // Update the Controller's value
                     }}
-                    value={field.w}
+                    value={field.weight}
                   />
                   {fieldState.invalid && (
                     <Text style={styles.emessage}>
