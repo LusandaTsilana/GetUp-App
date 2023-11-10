@@ -55,7 +55,7 @@ const Signup = () => {
   //data will be collected and stored through the functions of submission
   const onSubmit = (data) => {
     console.log(data);
-    navigation.navigate("Biometrics");
+    navigation.navigate("Goal");
   };
 
   return (

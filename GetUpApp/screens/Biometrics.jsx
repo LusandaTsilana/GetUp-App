@@ -79,7 +79,7 @@ const Biometrics = () => {
   const {
     control,
     handleSubmit,
-    fieldState: { error },
+    // fieldState: { error },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
