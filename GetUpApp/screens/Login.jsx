@@ -4,7 +4,6 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Image,
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
@@ -12,10 +11,8 @@ import { Link } from "@react-navigation/native";
 
 import React from "react";
 import Head from "../components/Head";
-import Facebook from "../assets/facebook.png";
-import Twitter from "../assets/twitter.png";
-import Google from "../assets/google.png";
 import BackButton from "../components/BackButton";
+import SocialAuth from "../components/socialauth";
 
 const Login = () => {
   return (
@@ -41,11 +38,10 @@ const Login = () => {
           </TouchableOpacity>
 
           <Text style={styles.text}>Or Log In with:</Text>
-          <View style={styles.icons}>
-            <Image style={styles.image} source={Facebook} />
-            <Image style={styles.twitter} source={Twitter} />
-            <Image style={styles.image} source={Google} />
-          </View>
+
+          {/* component for social auth */}
+          <SocialAuth />
+
           <Text style={styles.text}>
             Don't have an account?
             <Link to={{ screen: "Signup" }} style={styles.signtext}>

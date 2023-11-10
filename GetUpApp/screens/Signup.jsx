@@ -6,7 +6,6 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-  Image,
   KeyboardAvoidingView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -16,9 +15,8 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Head from "../components/Head";
-import Twitter from "../assets/twitter.png";
-import Facebook from "../assets/facebook.png";
-import Google from "../assets/google.png";
+import BackButton from "../components/BackButton";
+import SocialAuth from "../components/socialauth";
 
 const Signup = () => {
   const navigation = useNavigation();
@@ -64,6 +62,7 @@ const Signup = () => {
       keyboardVerticalOffset={100}
       style={{ flex: 1, backgroundColor: "#F1D8C1" }}
     >
+      <BackButton />
       <Head />
       <ScrollView>
         {/*  gg is the header with the name & logo */}
@@ -186,11 +185,9 @@ const Signup = () => {
             </TouchableOpacity>
 
             <Text style={styles.text}>Or Sign Up with:</Text>
-            <View style={styles.icons}>
-              <Image style={styles.image} source={Facebook} />
-              <Image style={styles.twitter} source={Twitter} />
-              <Image style={styles.image} source={Google} />
-            </View>
+
+            {/* component for social auth */}
+            <SocialAuth />
           </View>
         </View>
       </ScrollView>
@@ -200,6 +197,7 @@ const Signup = () => {
 const styles = StyleSheet.create({
   box: {
     backgroundColor: "#F0C9A5",
+    paddingBottom: 60,
   },
   heading: {
     fontSize: 24,
@@ -266,24 +264,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 30,
     marginTop: 20,
-  },
-
-  image: {
-    width: 55,
-    height: 55,
-    marginHorizontal: 20,
-  },
-
-  twitter: {
-    width: 55,
-    height: 60,
-    marginHorizontal: 20,
-  },
-
-  icons: {
-    flexDirection: "row",
-    justifyContent: "center",
-    paddingBottom: 30,
   },
 });
 

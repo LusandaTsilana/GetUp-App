@@ -3,6 +3,7 @@ import React from "react";
 
 import { useNavigation } from "@react-navigation/native";
 
+import BackButton from "../components/BackButton.jsx";
 import Head from "../components/Head.jsx";
 
 const Goal = () => {
@@ -10,6 +11,7 @@ const Goal = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       <Head />
       <View style={styles.box}>
         <Text style={styles.heading}>What is your goal?</Text>
