@@ -71,112 +71,120 @@ const Signup = () => {
           <Text style={styles.heading}>Sign Up</Text>
 
           <View style={styles.form}>
-            <Text style={styles.label}>First Name</Text>
-            <Controller
-              name="fname"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Enter your first name"
-                    onChangeText={field.onChange}
-                    value={field.value}
-                  />
-                  {fieldState.invalid && (
-                    <Text style={styles.emessage}>
-                      {fieldState.error?.message}
-                    </Text>
-                  )}
-                </>
-              )}
-            />
+            <View>
+              <Text style={styles.label}>First Name</Text>
+              <Controller
+                name="fname"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Enter your first name"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                    />
+                    {fieldState.invalid && (
+                      <Text style={styles.emessage}>
+                        {fieldState.error?.message}
+                      </Text>
+                    )}
+                  </>
+                )}
+              />
+            </View>
 
-            {/* Repeat the above block for other form fields (lname, email, password, cpassword) */}
+            <View>
+              <Text style={styles.label}>Last Name</Text>
+              <Controller
+                name="lname"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Enter your last name"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                    />
+                    {fieldState.invalid && (
+                      <Text style={styles.emessage}>
+                        {fieldState.error?.message}
+                      </Text>
+                    )}
+                  </>
+                )}
+              />
+            </View>
 
-            <Text style={styles.label}>Last Name</Text>
-            <Controller
-              name="lname"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Enter your last name"
-                    onChangeText={field.onChange}
-                    value={field.value}
-                  />
-                  {fieldState.invalid && (
-                    <Text style={styles.emessage}>
-                      {fieldState.error?.message}
-                    </Text>
-                  )}
-                </>
-              )}
-            />
+            <View>
+              <Text style={styles.label}>Email</Text>
+              <Controller
+                name="email"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Enter your email"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                    />
+                    {fieldState.invalid && (
+                      <Text style={styles.emessage}>
+                        {fieldState.error?.message}
+                      </Text>
+                    )}
+                  </>
+                )}
+              />
+            </View>
 
-            <Text style={styles.label}>Email</Text>
-            <Controller
-              name="email"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Enter your email"
-                    onChangeText={field.onChange}
-                    value={field.value}
-                  />
-                  {fieldState.invalid && (
-                    <Text style={styles.emessage}>
-                      {fieldState.error?.message}
-                    </Text>
-                  )}
-                </>
-              )}
-            />
+            <View>
+              <Text style={styles.label}>Password</Text>
+              <Controller
+                name="password"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Enter your password"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                    />
+                    {fieldState.invalid && (
+                      <Text style={styles.emessage}>
+                        {fieldState.error?.message}
+                      </Text>
+                    )}
+                  </>
+                )}
+              />
+            </View>
 
-            <Text style={styles.label}>Password</Text>
-            <Controller
-              name="password"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Enter your password"
-                    onChangeText={field.onChange}
-                    value={field.value}
-                  />
-                  {fieldState.invalid && (
-                    <Text style={styles.emessage}>
-                      {fieldState.error?.message}
-                    </Text>
-                  )}
-                </>
-              )}
-            />
-
-            <Text style={styles.label}>Confirm Password</Text>
-            <Controller
-              name="cpassword"
-              control={control}
-              render={({ field, fieldState }) => (
-                <>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Confirm your password"
-                    onChangeText={field.onChange}
-                    value={field.value}
-                  />
-                  {fieldState.invalid && (
-                    <Text style={styles.emessage}>
-                      {fieldState.error?.message}
-                    </Text>
-                  )}
-                </>
-              )}
-            />
+            <View>
+              <Text style={styles.label}>Confirm Password</Text>
+              <Controller
+                name="cpassword"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Confirm your password"
+                      onChangeText={field.onChange}
+                      value={field.value}
+                    />
+                    {fieldState.invalid && (
+                      <Text style={styles.emessage}>
+                        {fieldState.error?.message}
+                      </Text>
+                    )}
+                  </>
+                )}
+              />
+            </View>
 
             <TouchableOpacity
               style={styles.buttonS}
@@ -210,6 +218,9 @@ const styles = StyleSheet.create({
   form: {
     paddingHorizontal: 40,
     paddingVertical: 20,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   label: {
     fontSize: 16,

@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
   },
   label: {
     fontSize: 16,
