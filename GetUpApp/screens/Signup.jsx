@@ -22,15 +22,16 @@ const Signup = () => {
   const navigation = useNavigation();
 
   const schema = yup.object().shape({
-    fname: yup.string().required("Your first name is required"),
-    lname: yup.string().required("Your last name is required"),
+    fname: yup.string().min(3).required("Your first name is required"),
+    lname: yup.string().min(3).required("Your last name is required"),
     email: yup
       .string()
       .email("Incorrect email format. Enter a valid email")
       .required("Your email is required"),
-    password: yup.string().required("Password is required"),
+    password: yup.string().min(3).required("Password is required"),
     cpassword: yup
       .string()
+      .min(3)
       .required("Password is required")
       .oneOf([yup.ref("password"), null], "Password do not match. Try again"),
   });
@@ -62,8 +63,8 @@ const Signup = () => {
       keyboardVerticalOffset={100}
       style={{ flex: 1, backgroundColor: "#F1D8C1" }}
     >
-      <BackButton />
       <Head />
+      <BackButton />
       <ScrollView>
         {/*  gg is the header with the name & logo */}
         <View style={styles.box}>

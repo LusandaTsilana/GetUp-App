@@ -8,32 +8,109 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { Link } from "@react-navigation/native";
-
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
+
+//imports for validation
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+//imports for reusable components
 import Head from "../components/Head";
 import BackButton from "../components/BackButton";
 import SocialAuth from "../components/socialauth";
 
 const Login = () => {
+  const navigation = useNavigation();
+
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .email("Incorrect email format. Enter a valid email")
+      .required("Your email is required"),
+    password: yup.string().min(3).required("Password is required"),
+  });
+
+  const {
+    control,
+    handleSubmit,
+    // fieldState: { error },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  //data will be collected(console for now) and stored through the functions of submission
+  const onSubmit = (data) => {
+    console.log(data);
+    navigation.navigate("Today");
+  };
+
   return (
     <KeyboardAvoidingView
       behavior="padding"
       keyboardVerticalOffset={100}
       style={{ flex: 1, backgroundColor: "#F1D8C1" }}
     >
-      <BackButton />
       <Head />
+      <BackButton />
       {/*  Above is the header with the name & logo */}
       <ScrollView style={styles.box}>
         <Text style={styles.heading}>Log In</Text>
 
         <View style={styles.form}>
           <Text style={styles.label}>Email</Text>
-          <TextInput style={styles.input} placeholder="Enter your email" />
-          <Text style={styles.label}>Password</Text>
-          <TextInput style={styles.input} placeholder="Enter your password" />
 
-          <TouchableOpacity style={styles.buttonL} onPress={() => {}}>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field, fieldState }) => (
+              <>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your email"
+                  onChangeText={field.onChange}
+                  value={field.value}
+                />
+                {fieldState.invalid && (
+                  <Text style={styles.emessage}>
+                    {fieldState.error?.message}
+                  </Text>
+                )}
+              </>
+            )}
+          />
+
+          <Text style={styles.label}>Password</Text>
+
+          <Controller
+            name="password"
+            control={control}
+            render={({ field, fieldState }) => (
+              <>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your password"
+                  onChangeText={field.onChange}
+                  value={field.value}
+                />
+                {fieldState.invalid && (
+                  <Text style={styles.emessage}>
+                    {fieldState.error?.message}
+                  </Text>
+                )}
+              </>
+            )}
+          />
+
+          <TouchableOpacity
+            style={styles.buttonL}
+            onPress={handleSubmit(onSubmit)}
+          >
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
 
@@ -85,6 +162,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 1, // iOS shadow opacity
     shadowRadius: 4, // iOS shadow radius
   },
+
+  emessage: {
+    color: "red",
+    fontSize: 12,
+    paddingBottom: 25,
+  },
+
   buttonL: {
     justifyContent: "center",
     alignItems: "center",
