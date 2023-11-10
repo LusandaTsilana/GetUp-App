@@ -63,49 +63,53 @@ const Login = () => {
         <Text style={styles.heading}>Log In</Text>
 
         <View style={styles.form}>
-          <Text style={styles.label}>Email</Text>
+          <View>
+            <Text style={styles.label}>Email</Text>
 
-          <Controller
-            name="email"
-            control={control}
-            render={({ field, fieldState }) => (
-              <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your email"
-                  onChangeText={field.onChange}
-                  value={field.value}
-                />
-                {fieldState.invalid && (
-                  <Text style={styles.emessage}>
-                    {fieldState.error?.message}
-                  </Text>
-                )}
-              </>
-            )}
-          />
+            <Controller
+              name="email"
+              control={control}
+              render={({ field, fieldState }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your email"
+                    onChangeText={field.onChange}
+                    value={field.value}
+                  />
+                  {fieldState.invalid && (
+                    <Text style={styles.emessage}>
+                      {fieldState.error?.message}
+                    </Text>
+                  )}
+                </>
+              )}
+            />
+          </View>
 
-          <Text style={styles.label}>Password</Text>
+          <View>
+            <Text style={styles.label}>Password</Text>
 
-          <Controller
-            name="password"
-            control={control}
-            render={({ field, fieldState }) => (
-              <>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your password"
-                  onChangeText={field.onChange}
-                  value={field.value}
-                />
-                {fieldState.invalid && (
-                  <Text style={styles.emessage}>
-                    {fieldState.error?.message}
-                  </Text>
-                )}
-              </>
-            )}
-          />
+            <Controller
+              name="password"
+              control={control}
+              render={({ field, fieldState }) => (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your password"
+                    onChangeText={field.onChange}
+                    value={field.value}
+                  />
+                  {fieldState.invalid && (
+                    <Text style={styles.emessage}>
+                      {fieldState.error?.message}
+                    </Text>
+                  )}
+                </>
+              )}
+            />
+          </View>
 
           <TouchableOpacity
             style={styles.buttonL}
@@ -145,6 +149,8 @@ const styles = StyleSheet.create({
   form: {
     paddingHorizontal: 40,
     paddingVertical: 20,
+    flexDirection: "column",
+    justifyContent: "center",
   },
   label: {
     fontSize: 16,
