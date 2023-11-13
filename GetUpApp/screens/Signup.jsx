@@ -22,8 +22,8 @@ const Signup = () => {
   const navigation = useNavigation();
 
   const schema = yup.object().shape({
-    fname: yup.string().min(3).required("Your first name is required"),
-    lname: yup.string().min(3).required("Your last name is required"),
+    fname: yup.string().required("Your first name is required"),
+    lname: yup.string().required("Your last name is required"),
     email: yup
       .string()
       .email("Incorrect email format. Enter a valid email")
