@@ -7,8 +7,11 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Keyboard,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import { firebase } from "../firebase/firebase";
 
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
@@ -20,6 +23,46 @@ import SocialAuth from "../components/socialauth";
 
 const Signup = () => {
   const navigation = useNavigation();
+
+  const userDetails = firebase.firestore().collection("User Profile Data");
+  const [firstnameData, setFirstnameData] = useState("");
+  const [lastnameData, setLastnameData] = useState("");
+  const [emailData, setEmailData] = useState("");
+  const [passwordData, setPassData] = useState("");
+  const [cpassData, setCpassData] = useState("");
+
+  const addField = () => {
+    //check for new input data
+    if (firstnameData && firstnameData.length > 0) {
+      // get timestamp
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+      const data = {
+        createdAt: timestamp,
+        firstname: firstnameData,
+        lastname: lastnameData,
+        email: emailData,
+        password: passwordData,
+        cpassword: cpassData,
+      };
+
+      userDetails
+        .add(data)
+        .then(() => {
+          // reset the data field state
+          setFirstnameData("");
+          setLastnameData("");
+          setEmailData("");
+          setPassData("");
+          setCpassData("");
+
+          //release keyboard
+          Keyboard.dismiss();
+        })
+        .catch((error) => {
+          console.log("error with saving data to database");
+        });
+    }
+  };
 
   const schema = yup.object().shape({
     fname: yup.string().required("Your first name is required"),
@@ -42,18 +85,12 @@ const Signup = () => {
     // fieldState: { error },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      fname: "",
-      lname: "",
-      email: "",
-      password: "",
-      cpassword: "",
-    },
   });
 
   //data will be collected and stored through the functions of submission
   const onSubmit = (data) => {
     console.log(data);
+    addField();
     navigation.navigate("Goal");
   };
 
@@ -81,7 +118,10 @@ const Signup = () => {
                     <TextInput
                       style={styles.input}
                       placeholder="Enter your first name"
-                      onChangeText={field.onChange}
+                      onChangeText={(text) => {
+                        field.onChange(text);
+                        setFirstnameData(text);
+                      }}
                       value={field.value}
                     />
                     {fieldState.invalid && (
@@ -104,7 +144,10 @@ const Signup = () => {
                     <TextInput
                       style={styles.input}
                       placeholder="Enter your last name"
-                      onChangeText={field.onChange}
+                      onChangeText={(text) => {
+                        field.onChange(text);
+                        setLastnameData(text);
+                      }}
                       value={field.value}
                     />
                     {fieldState.invalid && (
@@ -127,7 +170,10 @@ const Signup = () => {
                     <TextInput
                       style={styles.input}
                       placeholder="Enter your email"
-                      onChangeText={field.onChange}
+                      onChangeText={(text) => {
+                        field.onChange(text);
+                        setEmailData(text);
+                      }}
                       value={field.value}
                     />
                     {fieldState.invalid && (
@@ -150,7 +196,10 @@ const Signup = () => {
                     <TextInput
                       style={styles.input}
                       placeholder="Enter your password"
-                      onChangeText={field.onChange}
+                      onChangeText={(text) => {
+                        field.onChange(text);
+                        setPassData(text);
+                      }}
                       value={field.value}
                     />
                     {fieldState.invalid && (
@@ -173,7 +222,10 @@ const Signup = () => {
                     <TextInput
                       style={styles.input}
                       placeholder="Confirm your password"
-                      onChangeText={field.onChange}
+                      onChangeText={(text) => {
+                        field.onChange(text);
+                        setCpassData(text);
+                      }}
                       value={field.value}
                     />
                     {fieldState.invalid && (
