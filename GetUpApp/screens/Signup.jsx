@@ -85,6 +85,13 @@ const Signup = () => {
     // fieldState: { error },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      fname: "",
+      lname: "",
+      email: "",
+      password: "",
+      cpassword: "",
+    },
   });
 
   //data will be collected and stored through the functions of submission
