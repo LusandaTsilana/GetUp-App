@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
+  Alert,
 } from "react-native";
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { firebase } from "../firebase/firebase";
 
@@ -22,7 +23,7 @@ import BackButton from "../components/BackButton";
 import SocialAuth from "../components/SocialAuth";
 
 const Signup = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const userDetails = firebase.firestore().collection("User Profile Data");
   const [firstnameData, setFirstnameData] = useState("");
@@ -109,7 +110,11 @@ const Signup = () => {
     addField();
     // Reset the form fields
     reset();
-    // navigation.navigate("Goal");
+
+    //alert for successful account creation
+    Alert.alert("Success!", "Account created");
+
+    navigation.navigate("Goal");
   };
 
   return (
