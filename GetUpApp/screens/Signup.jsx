@@ -67,12 +67,22 @@ const Signup = () => {
       .string()
       .email("Incorrect email format. Enter a valid email")
       .required("Your email is required"),
-    password: yup.string().min(3).required("Password is required"),
+    password: yup
+      .string()
+      .min(4, "Password should be a minimun of 4 characters")
+      .max(10, "Password should be a maximum of 10 characters")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{5,10}$/,
+        "Password must contain at least \n - one uppercase letter, \n - one lowercase letter, \n - one number, \n - and one special character."
+      )
+      .required("Password is required"),
+
     cpassword: yup
       .string()
-      .min(3)
+      .min(4, "Password should be a minimun of 4 characters")
+      .max(10, "Password should be a maximum of 10 characters")
       .required("Password is required")
-      .oneOf([yup.ref("password"), null], "Password do not match. Try again"),
+      .oneOf([yup.ref("password"), null], "Passwords do not match. Try again"),
   });
 
   const {
@@ -95,6 +105,7 @@ const Signup = () => {
   //data will be collected and stored through the functions of submission
   const onSubmit = (data) => {
     console.log(data);
+    //add data to firestore
     addField();
     // Reset the form fields
     reset();
