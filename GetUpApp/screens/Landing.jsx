@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
   },
   phrase: {
     fontSize: 16,
-    marginTop: 10,
+    marginTop: 13,
   },
   buttons: {
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 15,
   },
   buttonL: {
     backgroundColor: "#E88328",

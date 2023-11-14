@@ -19,7 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 //imports for reusable components
 import Head from "../components/Head";
 import BackButton from "../components/BackButton";
-import SocialAuth from "../components/socialauth";
+import SocialAuth from "../components/SocialAuth";
 
 const Login = () => {
   const navigation = useNavigation();

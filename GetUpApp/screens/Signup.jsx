@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { firebase } from "../firebase/firebase";
 
@@ -19,10 +19,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Head from "../components/Head";
 import BackButton from "../components/BackButton";
-import SocialAuth from "../components/socialauth";
+import SocialAuth from "../components/SocialAuth";
 
 const Signup = () => {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const userDetails = firebase.firestore().collection("User Profile Data");
   const [firstnameData, setFirstnameData] = useState("");
@@ -48,12 +48,8 @@ const Signup = () => {
       userDetails
         .add(data)
         .then(() => {
-          // reset the data field state
-          setFirstnameData("");
-          setLastnameData("");
-          setEmailData("");
-          setPassData("");
-          setCpassData("");
+          // reset the form fields
+          reset();
 
           //release keyboard
           Keyboard.dismiss();
@@ -82,6 +78,7 @@ const Signup = () => {
   const {
     control,
     handleSubmit,
+    reset,
     // fieldState: { error },
   } = useForm({
     resolver: yupResolver(schema),
@@ -92,13 +89,16 @@ const Signup = () => {
       password: "",
       cpassword: "",
     },
+    onSubmit: (data, e) => onSubmit(data, e),
   });
 
   //data will be collected and stored through the functions of submission
   const onSubmit = (data) => {
     console.log(data);
     addField();
-    navigation.navigate("Goal");
+    // Reset the form fields
+    reset();
+    // navigation.navigate("Goal");
   };
 
   return (
