@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //config for firebase
@@ -18,6 +18,9 @@ import Community from "./screens/Community.jsx";
 import Profile from "./screens/Profile.jsx";
 
 const Stack = createNativeStackNavigator();
+
+//to use navigation globally
+export const navigation = useNavigation();
 
 export default function App() {
   //initialize app and authenticate the user

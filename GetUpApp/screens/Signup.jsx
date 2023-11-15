@@ -10,22 +10,28 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { navigation } from "../App";
 import { useState } from "react";
 import { firebase } from "../firebase/firebase";
 
+//package for validations
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+//firebase auth to create user and store
+import auth from "@react-native-firebase/auth";
+
+//components
 import Head from "../components/Head";
 import BackButton from "../components/BackButton";
 import SocialAuth from "../components/SocialAuth";
 
 const Signup = () => {
-  const navigation = useNavigation();
-
+  //user data is stored on firestore database in a collection called User Profile Data
   const userDetails = firebase.firestore().collection("User Profile Data");
+
+  //declaring the storages for input fields
   const [firstnameData, setFirstnameData] = useState("");
   const [lastnameData, setLastnameData] = useState("");
   const [emailData, setEmailData] = useState("");
@@ -145,7 +151,7 @@ const Signup = () => {
                         field.onChange(text);
                         setFirstnameData(text);
                       }}
-                      value={field.value}
+                      value={firstnameData}
                     />
                     {fieldState.invalid && (
                       <Text style={styles.emessage}>
@@ -171,7 +177,7 @@ const Signup = () => {
                         field.onChange(text);
                         setLastnameData(text);
                       }}
-                      value={field.value}
+                      value={lastnameData}
                     />
                     {fieldState.invalid && (
                       <Text style={styles.emessage}>
@@ -197,7 +203,7 @@ const Signup = () => {
                         field.onChange(text);
                         setEmailData(text);
                       }}
-                      value={field.value}
+                      value={emailData}
                     />
                     {fieldState.invalid && (
                       <Text style={styles.emessage}>
@@ -223,7 +229,7 @@ const Signup = () => {
                         field.onChange(text);
                         setPassData(text);
                       }}
-                      value={field.value}
+                      value={passwordData}
                     />
                     {fieldState.invalid && (
                       <Text style={styles.emessage}>
@@ -249,7 +255,7 @@ const Signup = () => {
                         field.onChange(text);
                         setCpassData(text);
                       }}
-                      value={field.value}
+                      value={cpassData}
                     />
                     {fieldState.invalid && (
                       <Text style={styles.emessage}>

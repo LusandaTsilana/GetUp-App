@@ -9,24 +9,21 @@ import {
 } from "react-native";
 import { Link } from "@react-navigation/native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 
 //imports for validation
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+//navigation
+import { navigation } from "../App";
+
 //imports for reusable components
 import Head from "../components/Head";
 import BackButton from "../components/BackButton";
 import SocialAuth from "../components/SocialAuth";
 
-//imports for firebase authorization
-import auth from "@react-native-firebase/auth";
-
 const Login = () => {
-  const navigation = useNavigation();
-
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPassData] = useState("");
 
