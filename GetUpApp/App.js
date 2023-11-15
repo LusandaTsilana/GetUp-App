@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+//config for firebase
+import { firebase } from "./firebase/firebase.js";
 
 import Landing from "./screens/Landing.jsx";
 import Login from "./screens/Login.jsx";
@@ -16,13 +20,30 @@ import Profile from "./screens/Profile.jsx";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  //initialize app and authenticate the user
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; //to unsibscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
   return (
     <NavigationContainer>
       <View style={styles.container}>
         <StatusBar style="auto" />
 
         {/* Declaration of screens as stack of cards */}
-        <Stack.Navigator initialRouteName="Landing">
+        <Stack.Navigator initialRouteName={user ? "Today" : "Landing"}>
           <Stack.Screen
             name="Landing"
             component={Landing}

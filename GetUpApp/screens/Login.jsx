@@ -21,15 +21,21 @@ import Head from "../components/Head";
 import BackButton from "../components/BackButton";
 import SocialAuth from "../components/SocialAuth";
 
+//imports for firebase authorization
+import auth from "@react-native-firebase/auth";
+
 const Login = () => {
   const navigation = useNavigation();
+
+  const [emailData, setEmailData] = useState("");
+  const [passwordData, setPassData] = useState("");
 
   const schema = yup.object().shape({
     email: yup
       .string()
       .email("Incorrect email format. Enter a valid email")
       .required("Your email is required"),
-    password: yup.string().min(3).required("Password is required"),
+    password: yup.string().required("Password is required"),
   });
 
   const {
