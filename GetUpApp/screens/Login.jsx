@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import { Link, useNavigation } from "@react-navigation/native";
 import { React, useState } from "react";
@@ -14,6 +15,9 @@ import { React, useState } from "react";
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+//import for firebase auth
+import { firebase } from "../firebase/firebase";
 
 //imports for reusable components
 import Head from "../components/Head";
@@ -26,6 +30,7 @@ const Login = () => {
   const [emailData, setEmailData] = useState("");
   const [passwordData, setPassData] = useState("");
 
+  //validation rules
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -34,6 +39,7 @@ const Login = () => {
     password: yup.string().required("Password is required"),
   });
 
+  //form hooks for form fields
   const {
     control,
     handleSubmit,
@@ -47,9 +53,14 @@ const Login = () => {
   });
 
   //data will be collected(console for now) and stored through the functions of submission
-  const onSubmit = (data) => {
-    console.log(data);
-    navigation.navigate("Today");
+  const onSubmit = async (emailData, passwordData) => {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(emailData, passwordData);
+      navigation.navigate("Today");
+    } catch (error) {
+      Alert.alert("error in logging in the user");
+      console.error("no login", error);
+    }
   };
 
   return (
@@ -76,8 +87,13 @@ const Login = () => {
                   <TextInput
                     style={styles.input}
                     placeholder="Enter your email"
-                    onChangeText={field.onChange}
-                    value={field.value}
+                    onChangeText={(emailData) => {
+                      field.onChange(emailData);
+                      setEmailData(emailData);
+                    }}
+                    // value={emailData}
+                    autoCapitalize="none"
+                    autoCorrect={false}
                   />
                   {fieldState.invalid && (
                     <Text style={styles.emessage}>
@@ -100,8 +116,12 @@ const Login = () => {
                   <TextInput
                     style={styles.input}
                     placeholder="Enter your password"
-                    onChangeText={field.onChange}
-                    value={field.value}
+                    onChangeText={(passwordData) => {
+                      field.onChange(passwordData);
+                      setPassData(passwordData);
+                    }}
+                    autoCapitalize="none"
+                    autoCorrect={false}
                   />
                   {fieldState.invalid && (
                     <Text style={styles.emessage}>

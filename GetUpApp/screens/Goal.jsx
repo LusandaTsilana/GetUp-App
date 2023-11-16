@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { React, useNavigation } from "react";
+import { React } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import BackButton from "../components/BackButton.jsx";
 import Head from "../components/Head.jsx";
