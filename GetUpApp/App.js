@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //config for firebase
@@ -18,12 +18,14 @@ import Community from "./screens/Community.jsx";
 import Profile from "./screens/Profile.jsx";
 
 const Stack = createNativeStackNavigator();
+export const AppContext = createContext();
 
 export default function App() {
   //initialize app and authenticate the user
 
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+  const [firstnameData, setFirstnameData] = useState("");
 
   function onAuthStateChanged(user) {
     setUser(user);
@@ -38,67 +40,69 @@ export default function App() {
   if (initializing) return null;
 
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <StatusBar style="auto" />
+    <AppContext.Provider value={{ firstnameData, setFirstnameData }}>
+      <NavigationContainer>
+        <View style={styles.container}>
+          <StatusBar style="auto" />
 
-        {/* Declaration of screens as stack of cards */}
-        <Stack.Navigator initialRouteName={user ? "Today" : "Landing"}>
-          <Stack.Screen
-            name="Landing"
-            component={Landing}
-            options={{ headerShown: false }}
-          />
+          {/* Declaration of screens as stack of cards */}
+          <Stack.Navigator initialRouteName={user ? "Today" : "Today"}>
+            <Stack.Screen
+              name="Landing"
+              component={Landing}
+              options={{ headerShown: false }}
+            />
 
-          <Stack.Screen
-            name="Signup"
-            component={Signup}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ headerShown: false }}
-          />
+            <Stack.Screen
+              name="Signup"
+              component={Signup}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
 
-          {/* <Stack.Screen
+            {/* <Stack.Screen
             name="Biometrics"
             component={Biometrics}
             options={{ headerShown: false }}
           /> */}
 
-          <Stack.Screen
-            name="Goal"
-            component={Goal}
-            options={{ headerShown: false }}
-          />
+            <Stack.Screen
+              name="Goal"
+              component={Goal}
+              options={{ headerShown: false }}
+            />
 
-          <Stack.Screen
-            name="Today"
-            component={Today}
-            options={{ headerShown: false }}
-          />
+            <Stack.Screen
+              name="Today"
+              component={Today}
+              options={{ headerShown: false }}
+            />
 
-          <Stack.Screen
-            name="Workout"
-            component={Workout}
-            options={{ headerShown: false }}
-          />
+            <Stack.Screen
+              name="Workout"
+              component={Workout}
+              options={{ headerShown: false }}
+            />
 
-          <Stack.Screen
-            name="Community"
-            component={Community}
-            options={{ headerShown: false }}
-          />
+            <Stack.Screen
+              name="Community"
+              component={Community}
+              options={{ headerShown: false }}
+            />
 
-          <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </View>
-    </NavigationContainer>
+            <Stack.Screen
+              name="Profile"
+              component={Profile}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </View>
+      </NavigationContainer>
+    </AppContext.Provider>
   );
 }
 
