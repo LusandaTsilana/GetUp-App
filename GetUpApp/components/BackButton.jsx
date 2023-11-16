@@ -3,9 +3,11 @@ import React from "react";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import { navigation } from "../App";
+import { useNavigation } from "@react-navigation/native";
 
 const BackButton = () => {
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       onPress={() => navigation.goBack()}

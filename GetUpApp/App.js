@@ -19,9 +19,6 @@ import Profile from "./screens/Profile.jsx";
 
 const Stack = createNativeStackNavigator();
 
-//to use navigation globally
-export const navigation = useNavigation();
-
 export default function App() {
   //initialize app and authenticate the user
 

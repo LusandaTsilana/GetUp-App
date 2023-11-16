@@ -1,11 +1,12 @@
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import { navigation } from "../App";
 
 import Head from "../components/Head";
 import RunGirl from "../assets/run-girl.gif";
+import { useNavigation } from "@react-navigation/native";
 
 const Landing = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Head />

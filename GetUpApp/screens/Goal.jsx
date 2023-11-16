@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
-
-import { navigation } from "../App";
+import { React, useNavigation } from "react";
 
 import BackButton from "../components/BackButton.jsx";
 import Head from "../components/Head.jsx";
 
 const Goal = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Head />

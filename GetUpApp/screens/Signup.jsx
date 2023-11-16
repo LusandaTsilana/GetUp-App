@@ -10,7 +10,7 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
-import { navigation } from "../App";
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { firebase } from "../firebase/firebase";
 
@@ -20,7 +20,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 //firebase auth to create user and store
-import auth from "@react-native-firebase/auth";
+// import auth from "@react-native-firebase/auth";
 
 //components
 import Head from "../components/Head";
@@ -28,6 +28,8 @@ import BackButton from "../components/BackButton";
 import SocialAuth from "../components/SocialAuth";
 
 const Signup = () => {
+  const navigation = useNavigation();
+
   //user data is stored on firestore database in a collection called User Profile Data
   const userDetails = firebase.firestore().collection("User Profile Data");
 
