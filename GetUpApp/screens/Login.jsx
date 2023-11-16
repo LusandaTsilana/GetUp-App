@@ -59,7 +59,7 @@ const Login = () => {
       navigation.navigate("Today");
     } catch (error) {
       Alert.alert("error in logging in the user");
-      console.error("no login", error);
+      console.error("login fail", error);
     }
   };
 
@@ -91,7 +91,7 @@ const Login = () => {
                       field.onChange(emailData);
                       setEmailData(emailData);
                     }}
-                    // value={emailData}
+                    value={field.email}
                     autoCapitalize="none"
                     autoCorrect={false}
                   />
@@ -120,6 +120,7 @@ const Login = () => {
                       field.onChange(passwordData);
                       setPassData(passwordData);
                     }}
+                    value={field.password}
                     autoCapitalize="none"
                     autoCorrect={false}
                   />
