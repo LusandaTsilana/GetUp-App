@@ -13,20 +13,22 @@ const BackButton = () => {
       onPress={() => navigation.goBack()}
       style={styles.container}
     >
-      <Icon name="angle-left" size={35} color="black" paddingHorizontal={20} />
-      <Text style={styles.text}>Back</Text>
+      <Icon name="angle-left" size={35} style={styles.icon} />
     </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-
-    paddingVertical: 7,
-  },
   container: {
     flexDirection: "row",
     justifyContent: "flex-start",
+  },
+
+  icon: {
+    color: "black",
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    elevation: 4,
+    backgroundColor: "#E88328",
   },
 });
 export default BackButton;
