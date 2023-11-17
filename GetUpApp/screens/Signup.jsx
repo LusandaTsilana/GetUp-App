@@ -19,8 +19,7 @@ import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-//firebase auth to create user and store
-// import auth from "@react-native-firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 //components
 import Head from "../components/Head";
@@ -64,7 +63,7 @@ const Signup = () => {
           Keyboard.dismiss();
         })
         .catch((error) => {
-          console.log("error with saving data to database");
+          throw error;
         });
     }
   };
@@ -112,8 +111,17 @@ const Signup = () => {
   });
 
   //data will be collected and stored through the functions of submission
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, emailData, passwordData)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+
     //add data to firestore
     addField();
     // Reset the form fields

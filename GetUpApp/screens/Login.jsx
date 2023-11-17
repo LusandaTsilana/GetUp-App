@@ -18,6 +18,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 //import for firebase auth
 import { firebase } from "../firebase/firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 //imports for reusable components
 import Head from "../components/Head";
@@ -55,8 +56,17 @@ const Login = () => {
   //data will be collected(console for now) and stored through the functions of submission
   const onSubmit = async (emailData, passwordData) => {
     try {
-      await firebase.auth().signInWithEmailAndPassword(emailData, passwordData);
-      navigation.navigate("Today");
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, emailData, passwordData)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("User logged in successfully", user);
+          navigation.navigate("Today");
+        })
+        .catch((error) => {
+          console.log("eeeh", error);
+        });
     } catch (error) {
       Alert.alert("error in logging in the user");
       console.error("login fail", error);
@@ -91,7 +101,7 @@ const Login = () => {
                       field.onChange(emailData);
                       setEmailData(emailData);
                     }}
-                    value={field.email}
+                    value={emailData}
                     autoCapitalize="none"
                     autoCorrect={false}
                   />
@@ -120,7 +130,7 @@ const Login = () => {
                       field.onChange(passwordData);
                       setPassData(passwordData);
                     }}
-                    value={field.password}
+                    value={passwordData}
                     autoCapitalize="none"
                     autoCorrect={false}
                   />

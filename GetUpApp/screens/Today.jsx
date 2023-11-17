@@ -4,12 +4,14 @@ import React from "react";
 import Quote from "../assets/quotes/quote.png";
 
 import AppHeader from "../components/AppHeader";
+import BackButton from "../components/BackButton";
 
 const Today = () => {
   return (
     <View style={styles.container}>
       <View>
         <AppHeader />
+        <BackButton />
         <Image style={styles.quote} source={Quote} />
 
         <View>
