@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     color: "black",
     paddingHorizontal: 20,
     paddingVertical: 5,
-    elevation: 4,
     backgroundColor: "#E88328",
   },
 });
