@@ -77,7 +77,7 @@ const Signup = () => {
       .required("Your email is required"),
     password: yup
       .string()
-      .min(4, "Password should be a minimun of 4 characters")
+      .min(6, "Password should be a minimun of 4 characters")
       .max(10, "Password should be a maximum of 10 characters")
       // .matches(
       //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{5,10}$/,
@@ -111,26 +111,35 @@ const Signup = () => {
   });
 
   //data will be collected and stored through the functions of submission
-  const onSubmit = () => {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, emailData, passwordData)
-      .then((userCredential) => {
-        const user = userCredential.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
+  const onSubmit = async () => {
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        emailData,
+        passwordData
+      );
+      const user = userCredential.user;
+      console.log("successful registration", user);
 
-    //add data to firestore
-    addField();
-    // Reset the form fields
-    reset();
+      // User is created in Firebase Authentication, now add data to Firestore
+      addField();
 
-    //alert for successful account creation
-    Alert.alert("Success!", "Account created");
+      // Reset the form fields
+      reset();
 
-    navigation.navigate("Goal");
+      // Alert for successful account creation
+      Alert.alert("Success!", "Account created");
+
+      // Navigate to the desired screen
+      navigation.navigate("Goal");
+    } catch (error) {
+      // Handle errors, e.g., display an error message or log the error
+      console.error("Account creation failed", error);
+
+      // Show an alert with the error message
+      Alert.alert("Error", error.message);
+    }
   };
 
   return (

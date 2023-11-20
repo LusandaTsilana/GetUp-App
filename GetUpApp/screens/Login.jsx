@@ -57,20 +57,26 @@ const Login = () => {
   const onSubmit = async (emailData, passwordData) => {
     try {
       const auth = getAuth();
-      signInWithEmailAndPassword(auth, emailData, passwordData)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          console.log("User logged in successfully", user);
-          navigation.navigate("Today");
-        })
-        .catch((error) => {
-          console.log("Login failed", error);
-          Alert.alert("error in logging in the user");
-        });
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        emailData,
+        passwordData
+      );
+      const user = userCredential.user;
+      //console details
+      console.log("User logged in successfully", user);
+
+      //UI alert msg when successful
+      Alert.alert("Logged in successfully");
+
+      //if successful navigate to Today page
+      navigation.navigate("Today");
     } catch (error) {
-      Alert.alert("error in logging in the user");
-      console.error("login fail", error);
+      //console error
+      console.error("Login failed", error);
+
+      // show an UI alert
+      Alert.alert("Login failed", error.message);
     }
   };
 
