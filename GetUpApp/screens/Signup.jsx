@@ -79,10 +79,10 @@ const Signup = () => {
       .string()
       .min(4, "Password should be a minimun of 4 characters")
       .max(10, "Password should be a maximum of 10 characters")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{5,10}$/,
-        "Password must contain at least \n - one uppercase letter, \n - one lowercase letter, \n - one number, \n - and one special character."
-      )
+      // .matches(
+      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{5,10}$/,
+      //   "Password must contain at least \n - one uppercase letter, \n - one lowercase letter, \n - one number, \n - and one special character."
+      // )
       .required("Password is required"),
 
     cpassword: yup
@@ -118,8 +118,7 @@ const Signup = () => {
         const user = userCredential.user;
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.error("sign up fail", error);
       });
 
     //add data to firestore

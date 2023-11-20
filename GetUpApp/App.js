@@ -46,7 +46,7 @@ export default function App() {
           <StatusBar style="auto" />
 
           {/* Declaration of screens as stack of cards */}
-          <Stack.Navigator initialRouteName={user ? "Today" : "Landing"}>
+          <Stack.Navigator initialRouteName={user ? "Landing" : "Landing"}>
             <Stack.Screen
               name="Landing"
               component={Landing}

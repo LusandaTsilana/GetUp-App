@@ -65,7 +65,8 @@ const Login = () => {
           navigation.navigate("Today");
         })
         .catch((error) => {
-          console.log("eeeh", error);
+          console.log("Login failed", error);
+          Alert.alert("error in logging in the user");
         });
     } catch (error) {
       Alert.alert("error in logging in the user");
