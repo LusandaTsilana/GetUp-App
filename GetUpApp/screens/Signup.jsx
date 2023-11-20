@@ -28,7 +28,6 @@ import SocialAuth from "../components/SocialAuth";
 
 const Signup = () => {
   const navigation = useNavigation();
-  gg;
 
   //user data is stored on firestore database in a collection called User Profile Data
   const userDetails = firebase.firestore().collection("User Profile Data");
