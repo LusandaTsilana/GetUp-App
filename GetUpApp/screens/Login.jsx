@@ -16,10 +16,7 @@ import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-} from "@react-native-firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 //imports for reusable components
 import Head from "../components/Head";
