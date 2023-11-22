@@ -9,13 +9,10 @@ import BottomNav from "../components/BottomNav";
 const Today = () => {
   return (
     <View style={styles.container}>
-      <View>
-        <AppHeader />
+      <AppHeader />
+      <View style={styles.content}>
         <Image style={styles.quote} source={Quote} />
-
-        <View>
-          <Text style={styles.heading}>Explore</Text>
-        </View>
+        <Text style={styles.heading}>Explore</Text>
       </View>
       <BottomNav />
     </View>
@@ -23,6 +20,7 @@ const Today = () => {
 };
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "white",
   },
 
