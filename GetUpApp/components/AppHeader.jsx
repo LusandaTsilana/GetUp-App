@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import Star from "../assets/medals/star-award.png";
+
 import React from "react";
 
 const AppHeader = () => {
@@ -7,7 +7,7 @@ const AppHeader = () => {
     <View style={styles.main}>
       <View style={styles.container}>
         <Text style={styles.heading}>Good Day,</Text>
-        <Image style={styles.star} source={Star} />
+        <Text style={styles.name}>User</Text>
       </View>
     </View>
   );
@@ -19,14 +19,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: "column",
     marginVertical: 25,
     marginHorizontal: 30,
   },
 
   heading: {
-    textAlign: "right",
+    textAlign: "left",
+    fontSize: 32,
+    letterSpacing: 2.4,
+  },
+
+  name: {
+    textAlign: "left",
     fontSize: 32,
     letterSpacing: 2.4,
   },

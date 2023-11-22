@@ -46,8 +46,8 @@ export default function App() {
           <StatusBar style="auto" />
 
           {/* Declaration of screens as stack of cards */}
-          <Stack.Navigator initialRouteName={user ? "Landing" : "Landing"}>
-            <Stack.Screen
+          <Stack.Navigator initialRouteName={user ? "Landing" : "Today"}>
+            {/* <Stack.Screen
               name="Landing"
               component={Landing}
               options={{ headerShown: false }}
@@ -64,17 +64,17 @@ export default function App() {
               options={{ headerShown: false }}
             />
 
-            {/* <Stack.Screen
+            <Stack.Screen
             name="Biometrics"
             component={Biometrics}
             options={{ headerShown: false }}
-          /> */}
+          />
 
             <Stack.Screen
               name="Goal"
               component={Goal}
               options={{ headerShown: false }}
-            />
+            /> */}
 
             <Stack.Screen
               name="Today"
